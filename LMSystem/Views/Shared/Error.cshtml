@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Error";
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+<div class="container text-center mt-5">
+    <h1 class="display-4 text-danger">Something Went Wrong</h1>
+    <p class="lead">
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            @errorMessage
+        }
+        else
+        {
+            <text>An unexpected error occurred while processing your request.</text>
+        }
+    </p>
+    <a asp-action="Index" asp-controller="Books" class="btn btn-primary">Back to Book List</a>
+</div>

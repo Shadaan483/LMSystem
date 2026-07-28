@@ -1,0 +1,82 @@
+@model List<LMSystem.Models.Book>
+@{
+    ViewData["Title"] = "Home";
+    var spineClasses = new[] { "book-spine--ink", "book-spine--brass", "book-spine--burgundy" };
+}
+
+<section class="hero-band">
+    <p class="hero-eyebrow">LMSystem Library</p>
+    <h1 class="hero-title">A quiet place to keep track of every book, borrower, and due date.</h1>
+    <p class="hero-sub">Browse the catalog, manage borrowing, and keep the shelves in order &mdash; all from one dashboard.</p>
+    <a href="/Books/Index" class="btn btn-brass btn-lg">Browse the Catalog</a>
+</section>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-12">
+            <h2 class="section-title">New Arrivals</h2>
+            <p class="section-sub text-muted">The latest additions to the catalog.</p>
+            <hr class="section-rule" />
+        </div>
+
+        @if (Model != null && Model.Count > 0)
+        {
+            for (int i = 0; i < Model.Count; i++)
+            {
+                var book = Model[i];
+                <div class="col-md-4 mb-4">
+                    <div class="book-spine @spineClasses[i % spineClasses.Length]">
+                        <div class="book-spine__cover">
+                            @if (!string.IsNullOrWhiteSpace(book.ISBN))
+                            {
+                                <img class="book-spine__cover-img"
+                                     src="https://covers.openlibrary.org/b/isbn/@(book.ISBN)-L.jpg"
+                                     alt=""
+                                     loading="lazy"
+                                     onerror="this.style.display='none'" />
+                            }
+                            <div class="book-spine__cover-scrim"></div>
+                            <div class="book-spine__cover-text">
+                                <span class="book-spine__title">@book.Title</span>
+                                <span class="book-spine__author">by @book.Author</span>
+                            </div>
+                        </div>
+                        <div class="book-spine__body">
+                            <p class="book-spine__meta mb-2">
+                                Published @book.PublishedDate.Year &middot; ISBN @book.ISBN
+                            </p>
+                            <span class="badge @(book.IsAvailable ? "bg-success" : "bg-danger") mb-3" style="width: fit-content;">
+                                @(book.IsAvailable ? "Available" : "Checked out")
+                            </span>
+                            <a href="/Books/Details/@book.BookId" class="btn btn-outline-brass btn-sm w-100 mt-auto">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="empty-state">
+                    <p class="mb-3">The catalog is empty right now.</p>
+                    <a href="/Books/Create" class="btn btn-brass btn-sm">Add the first book</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row my-5">
+        <div class="col-12">
+            <h2 class="section-title">Library Announcements</h2>
+            <hr class="section-rule" />
+        </div>
+        <div class="col-md-12">
+            <div class="announcement announcement--info">
+                <strong>New Arrivals:</strong> Check out the latest books added to our collection above.
+            </div>
+            <div class="announcement announcement--warning">
+                <strong>Library Hours Update:</strong> The library will be closed on public holidays.
+            </div>
+        </div>
+    </div>
+</div>

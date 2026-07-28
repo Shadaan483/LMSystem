@@ -1,0 +1,36 @@
+@model LMSystem.Models.Publication
+
+@{
+    string currentType = Model.Type.ToString();
+    ViewData["Title"] = "Remove " + currentType;
+}
+
+<div class="container mt-4" style="max-width: 550px;">
+    <div class="card border-danger shadow-sm">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">&#9888; Confirm Permanent Deletion</h4>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Are you absolutely sure you want to remove this publication from the collection? This action cannot be undone.</p>
+
+            <dl class="row bg-light p-3 rounded">
+                <dt class="col-sm-4 text-secondary">Title:</dt>
+                <dd class="col-sm-8 font-weight-bold">@Model.Title</dd>
+
+                <dt class="col-sm-4 text-secondary">Publisher:</dt>
+                <dd class="col-sm-8">@Model.Publisher</dd>
+
+                <dt class="col-sm-4 text-secondary">Issue Date:</dt>
+                <dd class="col-sm-8">@Model.PublishedDate.ToString("yyyy-MM-dd")</dd>
+            </dl>
+
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex gap-2 justify-content-end mt-3">
+                    <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
+                    <a asp-action="Index" asp-route-type="@currentType" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

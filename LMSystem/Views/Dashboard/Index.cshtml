@@ -1,0 +1,84 @@
+@model LMSystem.Models.DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="container mt-5">
+    <!-- Header Title -->
+    <div class="row mb-4">
+        <div class="col-12 text-center text-md-start">
+            <h2 class="fw-bold border-bottom pb-2 text-dark">Admin Dashboard</h2>
+        </div>
+    </div>
+
+    <!-- Dashboard Stat Cards Grid -->
+    <div class="row g-4">
+        <!-- Total Students -->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-white" style="background-color: #1B2A41;">
+                <div class="card-body d-flex flex-column justify-content-between p-4">
+                    <div>
+                        <h6 class="text-uppercase fw-semibold opacity-75 mb-1">Total Students</h6>
+                        <h2 class="display-6 fw-bold mb-0">@Model.TotalStudents</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Books -->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-white" style="background-color: #2F4A63;">
+                <div class="card-body d-flex flex-column justify-content-between p-4">
+                    <div>
+                        <h6 class="text-uppercase fw-semibold opacity-75 mb-1">Total Books</h6>
+                        <h2 class="display-6 fw-bold mb-0">@Model.TotalBooks</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Librarians -->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-white" style="background-color: #8C3A3A;">
+                <div class="card-body d-flex flex-column justify-content-between p-4">
+                    <div>
+                        <h6 class="text-uppercase fw-semibold opacity-75 mb-1">Total Librarians</h6>
+                        <h2 class="display-6 fw-bold mb-0">@Model.TotalLibrarians</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Borrowings -->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-white" style="background-color: #B08D57;">
+                <div class="card-body d-flex flex-column justify-content-between p-4">
+                    <div>
+                        <h6 class="text-uppercase fw-semibold opacity-75 mb-1">Total Borrowings</h6>
+                        <h2 class="display-6 fw-bold mb-0">@Model.TotalBorrowings</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Publications -->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm text-white" style="background-color: #4B4237;">
+                <div class="card-body d-flex flex-column justify-content-between p-4">
+                    <div>
+                        <h6 class="text-uppercase fw-semibold opacity-75 mb-1">Total Publications</h6>
+                        <h2 class="display-6 fw-bold mb-0">@Model.TotalPublications</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

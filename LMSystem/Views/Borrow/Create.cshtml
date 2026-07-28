@@ -1,0 +1,75 @@
+@model BorrowViewModel
+
+@{
+    ViewData["Title"] = "Borrow Book";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-journal-arrow-down"></i> Borrow Book</h4>
+                </div>
+
+                <div class="borrow-preview">
+                    @if (!string.IsNullOrWhiteSpace(Model.BookISBN))
+                    {
+                        <img src="https://covers.openlibrary.org/b/isbn/@(Model.BookISBN)-M.jpg"
+                             alt=""
+                             class="borrow-preview__cover"
+                             onerror="this.style.display='none'" />
+                    }
+                    <div class="borrow-preview__text">
+                        <div class="borrow-preview__title">@Model.BookTitle</div>
+                        @if (!string.IsNullOrWhiteSpace(Model.BookAuthor))
+                        {
+                            <div class="borrow-preview__author">by @Model.BookAuthor</div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.BookISBN))
+                        {
+                            <div class="borrow-preview__isbn">ISBN @Model.BookISBN</div>
+                        }
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <input type="hidden" asp-for="BookId" />
+
+                        <div class="mb-3">
+                            <label asp-for="BorrowerName" class="form-label"></label>
+                            <input asp-for="BorrowerName" class="form-control" placeholder="Enter your full name" autofocus />
+                            <span asp-validation-for="BorrowerName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="BorrowerEmail" class="form-label"></label>
+                            <input asp-for="BorrowerEmail" class="form-control" placeholder="you@example.com" />
+                            <span asp-validation-for="BorrowerEmail" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Phone" class="form-label"></label>
+                            <input asp-for="Phone" class="form-control" placeholder="e.g., 555-0100" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary me-2">
+                                <i class="bi bi-check-circle"></i> Confirm Borrow
+                            </button>
+                            <a asp-action="Index" asp-controller="Books" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
