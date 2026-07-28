@@ -1,4 +1,4 @@
-# LMSystem — Library Management System
+# 📖LMSystem — Library Management System
 
 A full-stack ASP.NET Core MVC application for managing a library's books, periodicals, borrowers, and staff — with real authentication, role-based access control, and a custom visual theme.
 
@@ -84,4 +84,4 @@ dotnet test
 
 ## License
 
-This project was built as part of an internship / coursework assignment.
+This project was built as part of MP Online Internship project.
