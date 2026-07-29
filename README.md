@@ -84,4 +84,4 @@ dotnet test
 
 ## License
 
-This project was built as part of MP Online Internship project.
+This project was built as part of MP Online Internship program.
